@@ -8,7 +8,8 @@ export class Checkbox extends React.Component {
     };
 
     render() {
-        const {onChange, error, label, isHorizontal, col1, col2, value, show, ...inputProps} = this.props;
+        const {onChange, error, label, isHorizontal, col1, col2, value, show, addonPrepend, addonAppend, ...inputProps
+        } = this.props;
 
         return (
             <div className={classNames({'form-group': isHorizontal}, error ? 'error' : null)}>

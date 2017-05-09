@@ -1,16 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Group} from './group.component';
 
-
-export class Input extends React.Component {
-    handleChange = event => {
-        this.props.onChange(event.target.value);
+/**
+ * Plain text with a label.
+ */
+export class Static extends React.Component {
+    static propTypes = {
+        fmtValue: PropTypes.func,
     };
 
     render() {
-        const {onChange, error, label, isHorizontal, col1, col2, show, addonPrepend, addonAppend, ...inputProps
-        } = this.props;
+        const {error, label, isHorizontal, col1, col2, value, fmtValue} = this.props;
 
         return (
             <Group controlId={this.props.id}
@@ -20,8 +22,9 @@ export class Input extends React.Component {
                    validationState={error ? 'error' : null}
                    col1={col1}
                    col2={col2}>
-                <input onChange={this.handleChange}
-                       className="form-control" {...inputProps}/>
+                <p className="form-control-static">
+                    {fmtValue ? fmtValue(value) : value}
+                </p>
             </Group>
         );
     }

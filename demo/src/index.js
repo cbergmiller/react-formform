@@ -1,9 +1,9 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import {FormForm, Input, Textarea, Checkbox} from '../../src';
+import {FormForm, Input, Textarea, Checkbox, Select} from '../../src';
 
-import '../css/bootstrap.css';
+import '../css/bootstrap.min.css';
 
 
 class Demo extends React.Component {
@@ -23,6 +23,11 @@ class Demo extends React.Component {
         this.setState({errors});
     };
 
+    static choices = [
+        ['foo', 'Foo'],
+        ['bar', 'Bar'],
+    ];
+
     render() {
         return (
             <div className="container">
@@ -33,8 +38,9 @@ class Demo extends React.Component {
                           onErrorsChange={this.handleErrorsChange}
                           isHorizontal>
                     <Input name="name" type="text" label="Name"/>
-                    <Checkbox name="status" label="Status"/>
+                    <Checkbox name="status" label="Add comment"/>
                     <Textarea name="text" label="Comment" show={g => !!g('status')}/>
+                    <Select name="select" label="Select" choices={Demo.choices}/>
                 </FormForm>
                 <pre>
                     {JSON.stringify(this.state.values, null, '    ')}

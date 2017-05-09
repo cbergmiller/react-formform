@@ -28,7 +28,7 @@ import classNames from 'classnames';
 export class Group extends React.Component {
     static propTypes = {
         controlId: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
+        label: PropTypes.string,
         helpText: PropTypes.string,
         validationState: PropTypes.oneOf(['success', 'warning', 'error']),
         isHorizontal: PropTypes.bool,
@@ -37,6 +37,7 @@ export class Group extends React.Component {
     };
 
     static defaultProps = {
+        label: '',
         error: null,
         isHorizontal: false,
         col1: 2,
@@ -83,34 +84,32 @@ export class Group extends React.Component {
             this.props.validationState ? `has-${this.props.validationState}` : null
         );
 
-        if (!this.props.isHorizontal) {
-            // Standard form
+        if (this.props.isHorizontal) {
+            // Horizontal form
             return (
                 <div className={groupClassName}>
-                    {this.props.label ?
-                        <label htmlFor={this.props.controlId}>
-                            {this.props.label}
-                        </label> : null
-                    }
-                    {input}
-                    {helpBlock}
+                    <label htmlFor={this.props.controlId}
+                           className={`col-sm-${this.props.col1} control-label`}>
+                        {this.props.label}
+                    </label>
+                    <div className={`col-sm-${this.props.col2}`}>
+                        {input}
+                        {helpBlock}
+                    </div>
                 </div>
             );
         }
-
-        // Horizontal form
+        // Standard form
         return (
             <div className={groupClassName}>
-                <label htmlFor={this.props.controlId}
-                       className={`col-sm-${this.props.col1} control-label`}>
-                    {this.props.label}
-                </label>
-                <div className={`col-sm-${this.props.col2}`}>
-                    {input}
-                    {helpBlock}
-                </div>
+                {this.props.label ?
+                    <label htmlFor={this.props.controlId}>
+                        {this.props.label}
+                    </label> : null
+                }
+                {input}
+                {helpBlock}
             </div>
         );
-
     }
 }

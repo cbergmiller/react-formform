@@ -24,12 +24,15 @@ export class FormForm extends React.Component {
         col1: PropTypes.number,
         col2: PropTypes.number,
         namePrefix: PropTypes.string,
+        encType: PropTypes.string,
     };
 
     static defaultProps = {
         errors: {},
         col1: 2,
         col2: 10,
+        namePrefix: '',
+        encType: 'application/x-www-form-urlencoded',
     };
 
     handleChange = (name, value) => {
